@@ -30,3 +30,21 @@ exports.tampilberdasarkanid = function (req, res) {
             }
         })
 }
+
+
+//menambahkan data karyawan
+exports.tambahKaryawan = function (req, res) {
+    var nik = req.body.nik;
+    var nama = req.body.nama;
+    var departemen = req.body.departemen;
+
+    connection.query("INSERT INTO karyawan (nik, nama, departemen) VALUES (?,?,?)",
+        [nik, nama, departemen],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error)
+            } else {
+                response.ok("Berhasil menambahkan data", res)
+            }
+        })
+}
