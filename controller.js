@@ -66,3 +66,16 @@ exports.ubahKaryawan = function (req, res) {
             }
         })
 }
+
+exports.hapusKaryawan = function (req, res) {
+    var id = req.body.id_karyawan;
+
+    connection.query("DELETE FROM karyawan where id_karyawan=?", [id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error)
+            } else {
+                response.ok("Berhasil Hapus Data", res)
+            }
+        })
+}
