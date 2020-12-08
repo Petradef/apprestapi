@@ -48,3 +48,21 @@ exports.tambahKaryawan = function (req, res) {
             }
         })
 }
+
+//mengubah data berdasarkan id
+exports.ubahKaryawan = function (req, res) {
+
+    var id = req.body.id_karyawan;
+    var nik = req.body.nik;
+    var nama = req.body.nama;
+    var departemen = req.body.departemen;
+
+    connection.query("UPDATE karyawan SET nik=?, nama=?, departemen=? WHERE id_karyawan =?", [nik, nama, departemen, id],
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error)
+            } else {
+                response.ok("Berhasil Ubah Data", res)
+            }
+        })
+}
