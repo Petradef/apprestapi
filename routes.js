@@ -16,5 +16,7 @@ module.exports = function (app) {
     app.route("/ubah").put(jsonku.ubahKaryawan)
 
     app.route("/hapus").delete(jsonku.hapusKaryawan)
+
+    app.route("/tampilkompetensi").get(jsonku.tampilgroupkompetensi)
 }
 

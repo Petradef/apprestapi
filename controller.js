@@ -79,3 +79,17 @@ exports.hapusKaryawan = function (req, res) {
             }
         })
 }
+
+//menampilkan kompetensi group
+exports.tampilgroupkompetensi = function (req, res) {
+    connection.query('SELECT karyawan.id_karyawan, karyawan.nik, karyawan.nama, kompetensi.kompetensi, kompetensi.sks FROM krk JOIN kompetensi JOIN karyawan WHERE krk.id_kompetensi = kompetensi.id_kompetensi AND krk.id_karyawan = karyawan.id_karyawan ORDER by karyawan.id_karyawan',
+        function (error, rows, fields) {
+            if (error) {
+                console.log(error)
+            } else {
+                response.oknested(rows, res)
+            }
+        }
+    )
+
+}
