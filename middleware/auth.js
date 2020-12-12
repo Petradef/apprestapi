@@ -10,15 +10,14 @@ var ip = require("ip")
 exports.registrasi = function (req, res) {
     var post = {
         username: req.body.username,
-        email: req.body.emai,
+        email: req.body.email,
         password: md5(req.body.password),
         role: req.body.role,
-        tanggal_daftar: new Date()
-
+        tanggal_daftar: new Date(),
     }
 
-    var query = "SELECT email from ?? WHERE ??";
-    var table = ["user", "email", post.email]
+    var query = "SELECT email from ?? WHERE ??=?";
+    var table = ["user", "email", post.email];
 
     query = mysql.format(query, table)
 
@@ -27,8 +26,8 @@ exports.registrasi = function (req, res) {
             console.log(error)
         } else {
             if (rows.length == 0) {
-                const query = "INSERT INTO ?? SET ?"
-                const table = ["user"];
+                var query = "INSERT INTO ?? SET ?";
+                var table = ["user"];
                 query = mysql.format(query, table)
                 connection.query(query, post, function (error, rows) {
                     if (error) {
@@ -36,9 +35,9 @@ exports.registrasi = function (req, res) {
                     } else {
                         response.ok("Berhasil menambahkan data user baru", res)
                     }
-                })
+                });
             } else {
-                response.ok("Email sudah terdaftar!")
+                response.ok("Email sudah terdaftar!", res)
             }
         }
     })
